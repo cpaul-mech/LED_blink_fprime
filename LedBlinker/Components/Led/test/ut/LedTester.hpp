@@ -44,7 +44,9 @@ class LedTester final : public LedGTestBase {
     // ----------------------------------------------------------------------
 
     //! To do
-    void toDo();
+    void testBlinking();
+
+    void testBlinkInterval();
 
   private:
     // ----------------------------------------------------------------------

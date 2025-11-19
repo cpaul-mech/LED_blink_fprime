@@ -6,9 +6,14 @@
 
 #include "LedTester.hpp"
 
-TEST(Nominal, toDo) {
+TEST(Nominal, testBlinking) {
     Components::LedTester tester;
-    tester.toDo();
+    tester.testBlinking();
+}
+
+TEST(Nominal, testBlinkInterval) {
+    Components::LedTester tester;
+    tester.testBlinkInterval();
 }
 
 int main(int argc, char** argv) {
