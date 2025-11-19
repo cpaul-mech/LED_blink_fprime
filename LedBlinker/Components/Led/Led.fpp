@@ -28,6 +28,21 @@ module Components {
             id 2 \
             format "Set LED state to {}"
         
+        @ Telemetry channel for the blinking state
+        telemetry BlinkingState: Fw.On 
+
+        @Telemetry channel for the Number of blinking transitions
+        telemetry BlinkingTransitions: U64
+
+        @ Blinking Interval in rate Group Ticks
+        param BlinkingInterval: U32 default 1
+
+        @ Port receiving calls from the rate group
+        async input port run: Svc.Sched
+
+        @ Port for sending calls to the GPIO driver
+        output port gpioWrite: Drv.GpioWrite
+
         
 
         ##############################################################################

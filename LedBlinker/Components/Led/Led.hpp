@@ -36,6 +36,18 @@ class Led final : public LedComponentBase {
                                     U32 cmdSeq,           //!< The command sequence number
                                     Fw::On onOff          //!< Indicates whether the LED should be on or off
                                     ) override;
+    //! Handler implementation for run
+    //!
+    //! Port receiving calls from the rate group
+    void run_handler(FwIndexType portNum,  //!< The port number
+      U32 context           //!< The call order
+    ) override;
+
+    //! Emit Parameter updated EVR 
+    //! 
+    void parameterUpdated(FwPrmIdType id //!< The parameter ID
+      //!< Gives a chance to respond to parameter updates
+    ) override;
 
     Fw::On m_state = Fw::On::OFF; //! Keeps track if LED is on or off
     U64 m_transitions = 0; //! The number of on/off transitions that have occurred from FSW boot up
