@@ -41,7 +41,7 @@ module Components {
         async input port run: Svc.Sched
 
         @ Port for sending calls to the GPIO driver
-        output port gpioWrite: Drv.GpioWrite
+        output port gpioSet: Drv.GpioWrite
 
         
 

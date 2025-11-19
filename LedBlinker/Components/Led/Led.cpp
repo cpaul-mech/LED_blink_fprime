@@ -55,8 +55,8 @@ void Led ::run_handler(FwIndexType portNum, U32 context) {
             this->tlmWrite_BlinkingTransitions(this->m_transitions, Fw::Time());
 
             // Port may not be connected, so check before sending output
-            if (this->isConnected_gpioWrite_OutputPort(0)) {
-                this->gpioWrite_out(0, (Fw::On::ON == this->m_state) ? Fw::Logic::HIGH : Fw::Logic::LOW);
+            if (this->isConnected_gpioSet_OutputPort(0)) {
+                this->gpioSet_out(0, (Fw::On::ON == this->m_state) ? Fw::Logic::HIGH : Fw::Logic::LOW);
             }
 
             // TODO: Emit an event LedState to report the LED state (this->m_state).
@@ -69,8 +69,8 @@ void Led ::run_handler(FwIndexType portNum, U32 context) {
     else {
         if (this->m_state == Fw::On::ON) {
             // Port may not be connected, so check before sending output
-            if (this->isConnected_gpioWrite_OutputPort(0)) {
-                this->gpioWrite_out(0, Fw::Logic::LOW);
+            if (this->isConnected_gpioSet_OutputPort(0)) {
+                this->gpioSet_out(0, Fw::Logic::LOW);
             }
 
             this->m_state = Fw::On::OFF;

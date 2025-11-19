@@ -5,6 +5,7 @@
 // ======================================================================
 // Provides access to autocoded functions
 #include <LedBlinker/LedBlinker/Top/LedBlinkerTopologyAc.hpp>
+#include <Fw/Logger/Logger.hpp>
 // Note: Uncomment when using Svc:TlmPacketizer
 //#include <LedBlinker/LedBlinker/Top/LedBlinkerPacketsAc.hpp>
 
@@ -48,6 +49,11 @@ void configureTopology() {
 
     // Command sequencer needs to allocate memory to hold contents of command sequences
     cmdSeq.allocateBuffer(0, mallocator, 5 * 1024);
+    Os::File::Status status =
+    gpioDriver.open("/dev/gpiochip4", 13, Drv::LinuxGpioDriver::GpioConfiguration::GPIO_OUTPUT);
+    if (status != Os::File::Status::OP_OK) {
+        Fw::Logger::log("[ERROR] Failed to open GPIO pin\n");
+    }
 }
 
 // Public functions for use in main program are namespaced with deployment name LedBlinker
