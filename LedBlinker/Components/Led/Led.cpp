@@ -79,4 +79,25 @@ void Led ::run_handler(FwIndexType portNum, U32 context) {
     }
 }
 
+void Led ::parameterUpdated(FwPrmIdType id) {
+    Fw::ParamValid isValid = Fw::ParamValid::INVALID;
+    switch (id) {
+        case PARAMID_BLINKINGINTERVAL: {
+            // Read back the parameter value
+            const U32 interval = this->paramGet_BlinkingInterval(isValid);
+            // NOTE: isValid is always VALID in parameterUpdated as it was just properly set
+            FW_ASSERT(isValid == Fw::ParamValid::VALID, static_cast<FwAssertArgType>(isValid));
+
+            // Emit the blink interval set event
+            // TODO: Emit an event with, severity activity high, named BlinkIntervalSet that takes in an argument of
+            // type U32 to report the blink interval.
+            this->log_ACTIVITY_HI_BlinkIntervalSet(interval); //emitting an event follows this pattern: this->log_<severity>_<eventName>(<argument_if_any>);
+            break;
+        }
+        default:
+            FW_ASSERT(0, static_cast<FwAssertArgType>(id));
+            break;
+    }
+}
+
 }  // namespace Components
